@@ -1,0 +1,11 @@
+---
+- include_vars: "../default/main.yml"
+
+- name: sysctl params ensure
+  sysctl:
+    name: "{{ item.key }}"
+    value: "{{ item.value }}"
+    state: present
+    sysctl_file: /etc/sysctl.conf
+    reload: yes
+  with_dict: "{{ sysctl_params }}"

@@ -1,0 +1,35 @@
+---
+
+sysctl_params:
+  #Default sysctl parameters
+
+  #Time of saving connections, who don't used now
+  #It would save our memory, old connections would be closed
+
+
+  net.ipv4.tcp_keepalive_time: "1800"
+  net.ipv4.tcp_keepalive_intvl: "15"
+  net.ipv4.tcp_keepalive_probes: "5"
+
+  #Maximum number of saved connection requests,
+  #who don't receive approve from client
+  #It can be useful, when server under the load
+
+  net.ipv4.tcp_max_syn_backlog: "4096"
+
+  #Maximum number of open sockets, what are waiting connection
+
+  net.core.somaxconn: "2048"
+
+  #Percentage of occupied RAM at which begins swapping
+
+  vm.swappiness: "10"
+
+  # allow buffers up to 16MB
+  net.core.rmem_max: "16777216"
+  net.core.wmem_max: "16777216"
+
+  # increase Linux autotuning TCP buffer limit to 32MB
+  net.ipv4.tcp_rmem: "4096 87380 33554432"
+  net.ipv4.tcp_wmem: "4096 65536 33554432"
+

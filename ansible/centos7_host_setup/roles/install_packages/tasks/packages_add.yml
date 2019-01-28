@@ -1,0 +1,56 @@
+---
+
+- name: Add repositories
+  yum:
+    name: ['https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ ansible_distribution_major_version }}.noarch.rpm']
+    state: present
+
+- name: Add Docker repository.
+  get_url:
+    url: "https://download.docker.com/linux/centos/docker-ce.repo"
+    dest: '/etc/yum.repos.d/docker-ce.repo'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Import GPG keys
+  rpm_key:
+    key: "{{ item }}"
+    state: present
+  with_items:
+    - https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+    - https://download.docker.com/linux/centos/gpg
+
+- name: another packages install
+  yum:
+    name: ['atop',
+           'htop.x86_64',
+           'nfs-utils',
+           'vim',
+           'iotop',
+           'git',
+           'curl',
+           'wget']
+    state: present
+    update_cache: yes
+
+- name: docker install
+  yum:
+    name: ['yum-utils',
+           'device-mapper-persistent-data',
+           'lvm2',
+           'docker-ce',
+           'docker-compose']
+    update_cache: yes
+
+- name: docker start and enable
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: docker postinstall
+  user:
+    name: tomcat
+    groups: docker
+    append: yes

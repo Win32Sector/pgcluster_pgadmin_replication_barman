@@ -1,0 +1,5 @@
+---
+- name: yum-cron absent
+  yum:
+    name: yum-cron
+    state: removed

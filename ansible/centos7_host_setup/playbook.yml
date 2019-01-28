@@ -1,0 +1,10 @@
+---
+- hosts: centos
+  become: yes
+  vars:
+    security_pubkey: ""
+
+  roles:
+    - security
+    - kernel_settings
+    - install_packages
