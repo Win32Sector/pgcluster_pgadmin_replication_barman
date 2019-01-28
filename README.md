@@ -1,6 +1,13 @@
 ## INSTALL test_task project
 
-1. Create VM or some server with CentOS 7 on it.
-2. Execute `git clone https://github.com/Win32Sector/test_repo.git` to download repo with installation scripts.
-3. Execute script basic_script_ansible_install.sh to update, install epel, install latest ansible packages, and add ansible user.
-4. Go to directory ansible/centos7_host_setup and execute command `ansible-playbook -i inventory playbook.yml`
+1. Create VM or some server with CentOS 7 and give external ip to it.
+2. Execute on your server basic_script_ansible_install.sh for create tomcat user and add key for jenkins access.
+2. Go to the jenkins https://35.240.74.178 and login
+3. Here execute `basic server setup` for install tools and basic security
+4. Then, execute  `project deploy` for deploy project with docker-compose.
+5. For check, what was deployed, you can go to your server and execute `docker ps`. when pgpool would be in healthy status, you can go to the link http://<external_ip_of_your_server> and go to the pgadmin with
+```
+username: pgadmin@example.com
+pass:     admin123
+```
+6. You can check with switch off one of web nodes of pg admin, or pgmaster, pgslave.
