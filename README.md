@@ -11,5 +11,4 @@ username: pgadmin@example.com
 pass:     admin123
 ```
 
-
 6. You can check with switch off one of web nodes of pg admin, or pgmaster, pgslave.
